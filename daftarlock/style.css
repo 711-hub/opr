@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+  background: #0d1117; /* Warna Background Utama */
+  font-family: 'Segoe UI', sans-serif;
+  color: #e6edf3; /* Warna Highlight */
+}
+
+header {
+  background: transparent;
+  padding: 20px 0 10px 0;
+  text-align: center;
+  font-size: 70px;
+  font-weight: bold;
+  color: #e6edf3; /* Warna Aksen */
+}
+
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  border-radius: 10px;
+  background: #1e2630; /* Warna Background Kartu */
+}
+
+textarea {
+  width: 100%;
+  height: 200px;
+  font-family: monospace;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #1e2630; /* Warna Background Kartu */
+  color: #e6edf3; /* Warna Highlight */
+}
+
+button {
+  margin-top: 15px;
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #e6edf3; /* Warna Aksen */
+  color: #0d1117; /* Warna Background Utama */
+  cursor: pointer;
+  font-weight: bold;
+  transition: e6edf3 0.3s;
+}
+
+button:hover {
+  background-color: #e6edf3;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #3b4b5a;
+  text-align: center;
+}
+
+th {
+  background-color: #e6edf3;
+  color: #e6edf3; /* Warna Highlight */
+}
+
+td {
+  background-color: #112233;
+  color: #e6edf3; /* Warna Highlight */
+}
+
+.peringatan {
+  color: yellow;
+  font-weight: bold;
+}
+
+.icon-warning::before {
+  content: "⚠️ ";
+}
+
+.icon-check::before {
+  content: "✅ ";
+  color: lightgreen;
+}

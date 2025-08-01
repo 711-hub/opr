@@ -1,0 +1,35 @@
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>LOCK | UNLOCK</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>LOCK | UNLOCK</header>
+
+<div class="container">
+  <p>Paste log kamu di bawah ini:</p>
+  <textarea id="inputData" placeholder="Paste log tab format di sini..."></textarea>
+  <br>
+  <button onclick="processData()">Cek Status</button>
+
+  <table id="resultTable" style="display:none">
+    <thead>
+      <tr>
+        <th>Tanggal</th>
+        <th>Status</th>
+        <th>User ID</th>
+        <th>Unlocked</th>
+        <th>Peringatan</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+</div>
+
+<script src="script.js"> </script>
+
+</body>
+</html>
