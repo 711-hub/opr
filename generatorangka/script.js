@@ -1,4 +1,4 @@
-
+// angka 9 digit
 function generateRandomNumber(length = 9) {
   const chars = '0123456789';
   let result = '';
@@ -14,6 +14,7 @@ function generateRandomNumber(length = 9) {
   tanggalElemen.textContent = formatter.format(now).toUpperCase();
 
 
+// Data Pasaran
 const pasaranData = [
   { name: "DUBAI", tutup: "19:30 WIB", buka: "19:50 WIB", hari: "Buka Setiap Hari" },
   { name: "SYDNEY", tutup: "13:35 WIB", buka: "13:50 WIB", hari: "Buka Setiap Hari" },
@@ -26,6 +27,7 @@ const pasaranData = [
   { name: "KINGKONG 4D MALAM", tutup: "23:30 WIB", buka: "23:45 WIB", hari: "Buka Setiap Hari" },
 ];
 
+// shio
 function calculateShio(num) {
   const shioMap = {
     Ular: ["01", "13", "25", "37", "49", "61", "73", "85", "97"],
@@ -53,21 +55,32 @@ function calculateShio(num) {
 function copyToClipboard(columnId) {
   const column = document.getElementById(columnId);
 
-  let textToCopy = "";
-  const contentElements = column.querySelectorAll('h5');
-  
-  contentElements.forEach(element => {
-    textToCopy += element.innerText + "\n"; 
-  });
+  let textToCopy = '';
+  const contentElements = column.querySelectorAll('h4, h5');
 
+  contentElements.forEach(element => {
+    textToCopy += element.innerText.trim() + '\n';
+  });
   const textArea = document.createElement("textarea");
   textArea.value = textToCopy.trim();
   document.body.appendChild(textArea);
   textArea.select();
   document.execCommand("copy");
   document.body.removeChild(textArea);
+
+  const btn = column.querySelector("button");
+  const originalText = btn.innerText;
+  btn.innerText = "Tersalin!";
+  btn.disabled = true;
+
+  setTimeout(() => {
+    btn.innerText = originalText;
+    btn.disabled = false;
+  }, 2000);
 }
 
+
+// prediksi
 function processNumber(num) {
   const ai = num.slice(-4);
   const aiArray = ai.split('').sort(() => Math.random() - 0.5);
