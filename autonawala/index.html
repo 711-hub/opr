@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Auto Check Blokir (Skiddle — GitHub Pages Ready)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><h1>Auto Check Nawala</h1></header>
+
+<div class="wrap">
+  <section class="card left">
+    <h2>Daftar Link/Domain</h2>
+    <label for="urls">Masukkan URL/Domain (pisah baris, max 200)</label>
+    <textarea id="urls" placeholder="ayutogel.com
+hantogel.com
+https://sub.domain.id/path"></textarea>
+
+    <label for="interval" class="row" style="justify-content:space-between">
+      <span>Interval cek (detik)</span>
+      <span class="muted small">default 30 dtk</span>
+    </label>
+    <input id="interval" type="number" min="5" max="600" step="5" value="30"/>
+
+    <div class="bar">
+      <button id="saveList" class="btn">Simpan Daftar</button>
+      <button id="start" class="btn on">ON</button>
+      <button id="stop" class="btn stop">OFF</button>
+      <button id="reset" class="btn" title="Hapus semua data & mulai ulang">Reset</button>
+    </div>
+
+
+    <div style="margin-top:12px" class="stat">
+      <span class="chip"><b>Total:</b><span id="statTotal">0</span></span>
+      <span class="chip"><b>OK:</b><span id="statOk">0</span></span>
+      <span class="chip"><b>Terblokir:</b><span id="statBad">0</span></span>
+      <span class="chip"><b>Terakhir Cek:</b><span id="statLast">-</span></span>
+    </div>
+  </section>
+
+  <section class="card" style="display:flex;flex-direction:column;min-height:420px">
+    <div style="padding:12px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <h2 style="margin:0">Hasil Pemantauan</h2>
+      <span class="pill" id="statusRun">Status: berhenti</span>
+    </div>
+
+    <div class="tblwrap">
+      <table id="tblAll">
+        <thead>
+          <tr>
+            <th style="width:32px">#</th>
+            <th>Domain</th>
+            <th>Status</th>
+            <th>Sumber</th>
+            <th>Detail</th>
+            <th>Terakhir Cek</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div style="padding:12px 14px;border-top:1px solid var(--line);display:flex;align-items:center;gap:8px">
+      <h2 style="margin:0">Terblokir</h2>
+      <span class="pill bad">Tabel domain yang terdeteksi diblokir</span>
+    </div>
+    <div class="tblwrap">
+      <table id="tblBlocked">
+        <thead>
+          <tr>
+            <th style="width:32px">#</th>
+            <th>Domain</th>
+            <th>Sumber</th>
+            <th>Detail</th>
+            <th>Sejak</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
