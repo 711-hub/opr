@@ -85,6 +85,8 @@ function prosesData() {
     const salinTd = document.createElement('td');
     const salinBtn = document.createElement('button');
     salinBtn.textContent = 'Salin';
+    salinBtn.className = 'btn-table';
+
     salinBtn.onclick = () => {
       navigator.clipboard.writeText(rowData.join('\t'));
     };
