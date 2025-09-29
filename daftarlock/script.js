@@ -43,8 +43,8 @@ function processData() {
   const blacklist = [
     "marketing", "ref", "struk", "admin", "4d", "3d", "2d",
     "savety bet", "hantu", "ulang", "mkt", "edit", "addmin",
-    "memilih", "gunakan", "userid", "user id", "bermain",
-    "kembali", "daftar", "invest", "penipu", "pulsa", "staff", "pakai id","pilih", "resign"
+    "memilih", "gunakan", "bermain",
+    "kembali", "invest", "penipu", "pulsa", "staff", "pakai id","pilih", "resign"
   ];
 
   const warningKeywords = ["kosong", "form", "isi"];
@@ -104,4 +104,5 @@ function processData() {
   document.getElementById("resultTable").style.display = results.length ? "table" : "none";
 
 }
+
 
