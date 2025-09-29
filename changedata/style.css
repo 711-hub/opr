@@ -1,87 +1,126 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #0d1117;
+  color: #e6edf3;
+  margin: 30px;
+  overflow-x: hidden;
+}
+
 .container {
   max-width: 800px;
   margin: 40px auto;
   padding: 30px;
   background-color: #1e2630;
   border-radius: 12px;
-  box-shadow: 0 0 20px #00000044;
+  box-shadow: 0 0 15px rgba(0,0,0,0.6);
+  text-align: left;
 }
 
-
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #0d1117;
-  color: #e6edf3;
-  margin: 30px;
-}
-
+/* Textarea */
 textarea {
   width: 100%;
   height: 150px;
   padding: 12px 14px;
   background-color: #1e2630;
   color: #e6edf3;
-  border: 1px solid #c2d3d6;
+  border: 1px solid #2c3e50;
   border-radius: 10px;
   resize: vertical;
   box-shadow: 0 0 10px #00000044;
   transition: box-shadow 0.3s;
   font-family: 'Poppins', sans-serif;
+  margin-bottom: 20px;
 }
 
 textarea:focus {
   outline: none;
-  box-shadow: 0 0 12px #1e2630;
+  box-shadow: 0 0 12px #1a73e8;
 }
 
+/* Tombol container */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* Tombol */
 button {
-  padding: 14px 30px;
-  border-radius: 10px;
-  background: rgba(3, 115, 243, 0.1);
-  color: #e6edf3; /* Warna Highlight */
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(12px);
+  width: 30%;
+  max-width: 300px;
+  padding: 17px 0;
   font-weight: bold;
+  background: rgba(3, 115, 243, 0.15);
+  color: #e6edf3;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
+  font-size: 15px;
+  position: relative;
+  overflow: hidden;
   transition: all 0.3s ease;
-  margin: auto;
-  box-shadow: 0 4px 12px rgba(0, 18, 71, 0.2);
+  box-shadow: 6px 6px 12px #080b0f,
+              -6px -6px 12px #1a222d;
 }
 
-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.03);
+/* Efek cahaya berjalan */
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(3, 115, 243, 0.4),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: shine 3s infinite;
 }
 
+@keyframes shine {
+  0% { left: -150%; }
+  100% { left: 150%; }
+}
+
+button:hover,
+button:focus {
+  background: rgba(3, 115, 243, 0.25);
+  box-shadow: inset 4px 4px 8px #080b0f,
+              inset -4px -4px 8px #1a222d,
+              0 0 15px rgba(3, 115, 243, 0.4);
+  color: #fff;
+}
+
+/* Global fix */
+* {
+  box-sizing: border-box;
+}
+
+/* Output box */
 pre {
+  width: 100%;
   background: #1e2630;
   padding: 20px;
-  border: 1px solid #1e2630;
+  border: 1px solid #2c3e50;
   border-radius: 10px;
   color: #e6edf3;
-  font-size: 18px;
-  font-family: 'Courier New', monospace;
-  margin-top: 20px;
+  font-size: 16px;
+  font-family: 'Fira Code', monospace;
+  margin-top: 10px;
   box-shadow: 0 0 12px #00000044;
-  font-family: 'Poppins', sans-serif;
-}
 
-/* Efek salju */
-.snowflake {
-  position: fixed;
-  top: -10px;
-  color: #e6edf3;
-  user-select: none;
-  z-index: 9999;
-  animation-name: fall;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  font-size: 14px;
-  opacity: 0.7;
-}
+  /* Biar aman gak keluar */
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
 
-@keyframes fall {
-  0%   { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(100vh); opacity: 0; }
+  /* Scroll kalau isi terlalu banyak */
+  max-height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
