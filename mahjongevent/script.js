@@ -72,8 +72,8 @@ function prosesData() {
 
     const rowData = [
       data.user,
-      '',
-      '',
+      '-',
+      '-',
       data.game,
       periode,
       data.credit.toString(),
@@ -100,3 +100,4 @@ function prosesData() {
     tbody.appendChild(row);
   });
 }
+
