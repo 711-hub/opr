@@ -1,141 +1,164 @@
 body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #0d1117;
-      color: #e6edf3;
-      padding: 30px;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
+  font-family: 'Segoe UI', sans-serif;
+  background: #0d1117;
+  color: #e6edf3;
+  padding: 30px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
 
-    h2 {
-      font-size: 28px;
-      margin-bottom: 25px;
-      font-weight: 700;
-      color: #e8f3ff;
-      text-shadow: 0 0 6px #00aaff55;
-      letter-spacing: 1.2px;
-    }
+h2 {
+  font-size: 28px;
+  margin-bottom: 25px;
+  font-weight: 700;
+  color: #e8f3ff;
+  text-shadow: 0 0 6px #00aaff55;
+  letter-spacing: 1.2px;
+}
 
-    textarea {
-      width: 90%;
-      max-width: 800px;
-      height: 220px;
-      font-family: monospace;
-      font-size: 14px;
-      line-height: 1.5;
-      background: #0d1117;
-      color: #e6edf3;
-      border: none;
-      border-radius: 12px;
-      padding: 14px;
-      margin-bottom: 20px;
-      resize: vertical;
-      transition: all 0.3s ease;
-      box-shadow: 6px 6px 12px #080b0f,
-                  -6px -6px 12px #1a222d;
-    }
+textarea {
+  width: 90%;
+  max-width: 800px;
+  height: 220px;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  background: #0d1117;
+  color: #e6edf3;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 20px;
+  resize: vertical;
+  transition: all 0.3s ease;
+  box-shadow: 6px 6px 12px #080b0f,
+              -6px -6px 12px #1a222d;
+}
 
-    textarea:focus {
-      outline: none;
-      box-shadow: inset 4px 4px 8px #080b0f,
-                  inset -4px -4px 8px #1a222d,
-                  0 0 12px rgba(3, 115, 243, 0.4);
-    }
+textarea:focus {
+  outline: none;
+  box-shadow: inset 4px 4px 8px #080b0f,
+              inset -4px -4px 8px #1a222d,
+              0 0 12px rgba(3, 115, 243, 0.4);
+}
 
-    /* Button */
-    .button-container {
-      display: flex;
-      justify-content: center; /* biar rata tengah */
-      width: 100%;
-      margin-bottom: 20px;
-    }
+/* Container tombol utama */
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
 
-    button {
-      width: 30%;        /* panjang tombol 40% */
-      max-width: 300px;  /* biar gak kelebaran di layar besar */
-      padding: 17px 0;   /* atur tinggi tombol */
-      font-weight: bold;
-      background: rgba(3, 115, 243, 0.15);
-      color: #e6edf3;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 15px;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      box-shadow: 6px 6px 12px #080b0f,
-                  -6px -6px 12px #1a222d;
-    }
+/* Tombol utama (Proses Data) */
+button {
+  width: 30%;
+  max-width: 300px;
+  padding: 17px 0;
+  font-weight: bold;
+  background: rgba(3, 115, 243, 0.15);
+  color: #e6edf3;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 6px 6px 12px #080b0f,
+              -6px -6px 12px #1a222d;
+}
 
-    /* Efek cahaya berjalan */
-    button::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -150%;
-      width: 150%;
-      height: 100%;
-      background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(3, 115, 243, 0.4),
-        transparent
-      );
-      transform: skewX(-20deg);
-      animation: shine 3s infinite;
-    }
+/* Efek cahaya berjalan (global untuk semua tombol) */
+button::before,
+.btn-table::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(3, 115, 243, 0.4),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: shine 3s infinite;
+}
 
-    @keyframes shine {
-      0% { left: -150%; }
-      100% { left: 150%; }
-    }
+@keyframes shine {
+  0% { left: -150%; }
+  100% { left: 150%; }
+}
 
-    button:hover,
-    button:focus {
-      background: rgba(3, 115, 243, 0.25);
-      box-shadow: inset 4px 4px 8px #080b0f,
-                  inset -4px -4px 8px #1a222d,
-                  0 0 15px rgba(3, 115, 243, 0.4);
-      color: #fff;
-    }
+button:hover,
+button:focus,
+.btn-table:hover,
+.btn-table:focus {
+  background: rgba(3, 115, 243, 0.25);
+  box-shadow: inset 4px 4px 8px #080b0f,
+              inset -4px -4px 8px #1a222d,
+              0 0 15px rgba(3, 115, 243, 0.4);
+  color: #fff;
+}
 
-    table {
-      width: 95%;
-      max-width: 1000px;
-      margin-top: 20px;
-      border-collapse: collapse;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 12px rgba(0, 18, 71, 0.25);
-    }
+/* Tabel */
+table {
+  width: 95%;
+  max-width: 1000px;
+  margin-top: 20px;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0, 18, 71, 0.25);
+}
 
-    th, td {
-      padding: 12px;
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
+th, td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
 
-    th {
-      background: #1e2630;
-      color: #e6edf3;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
+th {
+  background: #1e2630;
+  color: #e6edf3;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
 
-    td {
-      background: #161b22;
-      color: #e6edf3;
-      transition: background 0.3s;
-    }
+td {
+  background: #161b22;
+  color: #e6edf3;
+  transition: background 0.3s;
+}
 
-    tr:nth-child(even) td {
-      background: #1b222c;
-    }
+tr:nth-child(even) td {
+  background: #1b222c;
+}
 
-    tr:hover td {
-      background: #222b36;
-    }
+tr:hover td {
+  background: #222b36;
+}
+
+/* Tombol kecil di dalam tabel (Salin, Check) */
+.btn-table {
+  position: relative;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: rgba(3, 115, 243, 0.15);
+  color: #fff;
+  box-shadow: 2px 2px 6px #080b0f,
+              -2px -2px 6px #1a222d;
+  transition: all 0.3s ease;
+  min-width: 70px;
+  overflow: hidden;
+}
