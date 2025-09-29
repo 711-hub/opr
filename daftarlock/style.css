@@ -1,89 +1,164 @@
 body {
-  margin: 0;
-  background: #0d1117; /* Warna Background Utama */
-  font-family: 'Segoe UI', sans-serif;
-  color: #e6edf3; /* Warna Highlight */
-}
+      margin: 0;
+      background: #0d1117;
+      font-family: 'Segoe UI', sans-serif;
+      color: #e6edf3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-header {
-  background: transparent;
-  padding: 20px 0 10px 0;
-  text-align: center;
-  font-size: 70px;
-  font-weight: bold;
-  color: #e6edf3; /* Warna Aksen */
-}
+    header {
+      padding: 25px 0 15px 0;
+      text-align: center;
+      font-size: 42px;
+      font-weight: bold;
+      color: #e8f3ff;
+      text-shadow: 0 0 8px #00aaff55;
+      letter-spacing: 1.5px;
+    }
 
-.container {
-  max-width: 1000px;
-  margin: 30px auto;
-  background-color: rgba(0, 0, 0, 0.3);
-  padding: 30px;
-  border-radius: 10px;
-  background: #1e2630; /* Warna Background Kartu */
-}
+    .container {
+      width: 95%;
+      max-width: 1000px;
+      margin: 20px auto 40px;
+      padding: 30px;
+      border-radius: 12px;
+      background: #1e2630;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6); /* shadow lebih gelap */
+    }
 
-textarea {
+
+    p {
+      margin-bottom: 10px;
+      font-weight: 500;
+      color: #9fb4cc;
+    }
+
+    textarea {
   width: 100%;
   height: 200px;
   font-family: monospace;
   font-size: 14px;
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  background-color: #1e2630; /* Warna Background Kartu */
-  color: #e6edf3; /* Warna Highlight */
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #0f141b;
+  color: #e6edf3;
+  resize: vertical;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-button {
-  margin-top: 15px;
-  padding: 12px 25px;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  background-color: #e6edf3; /* Warna Aksen */
-  color: #0d1117; /* Warna Background Utama */
-  cursor: pointer;
-  font-weight: bold;
-  transition: e6edf3 0.3s;
+textarea:focus {
+  outline: none;
+  border: 1px solid rgba(3, 115, 243, 0.4);
+  box-shadow: 0 0 10px rgba(3, 115, 243, 0.3);
 }
 
-button:hover {
-  background-color: #e6edf3;
-}
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 30px;
-}
+    /* Tombol Animasi */
+    button {
+      margin-top: 20px;
+      display: block;
+      width: 40%;
+      max-width: 280px;
+      padding: 15px 0;
+      font-size: 15px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(3, 115, 243, 0.15);
+      color: #e6edf3;
+      cursor: pointer;
+      font-weight: bold;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 6px 6px 12px #080b0f,
+                  -6px -6px 12px #1a222d;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-th, td {
-  padding: 12px;
-  border: 1px solid #3b4b5a;
-  text-align: center;
-}
+    button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 150%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(3, 115, 243, 0.4),
+        transparent
+      );
+      transform: skewX(-20deg);
+      animation: shine 3s infinite;
+    }
 
-th {
-  background-color: #e6edf3;
-  color: #e6edf3; /* Warna Highlight */
-}
+    @keyframes shine {
+      0% { left: -150%; }
+      100% { left: 150%; }
+    }
 
-td {
-  background-color: #112233;
-  color: #e6edf3; /* Warna Highlight */
-}
+    button:hover,
+    button:focus {
+      background: rgba(3, 115, 243, 0.25);
+      box-shadow: inset 4px 4px 8px #080b0f,
+                  inset -4px -4px 8px #1a222d,
+                  0 0 15px rgba(3, 115, 243, 0.4);
+      color: #fff;
+    }
 
-.peringatan {
-  color: yellow;
-  font-weight: bold;
-}
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 12px rgba(0, 18, 71, 0.25);
+    }
 
-.icon-warning::before {
-  content: "⚠️ ";
-}
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-.icon-check::before {
-  content: "✅ ";
-  color: lightgreen;
-}
+    th {
+      background: #1e2630;
+      color: #e6edf3;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      background: #161b22;
+      color: #e6edf3;
+      transition: background 0.3s;
+    }
+
+    tr:nth-child(even) td {
+      background: #1b222c;
+    }
+
+    tr:hover td {
+      background: #222b36;
+    }
+
+    /* Peringatan */
+    .peringatan {
+      color: yellow;
+      font-weight: bold;
+    }
+
+    .icon-warning::before {
+      content: "⚠️ ";
+    }
+
+    .icon-check::before {
+      content: "✅ ";
+      color: lightgreen;
+    }
