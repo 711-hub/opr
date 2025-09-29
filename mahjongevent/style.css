@@ -1,4 +1,4 @@
- body {
+body {
       font-family: 'Segoe UI', sans-serif;
       background: #0d1117;
       color: #e6edf3;
@@ -11,78 +11,131 @@
     }
 
     h2 {
-      font-size: 26px;
-      margin-bottom: 20px;
-      font-weight: 600;
+      font-size: 28px;
+      margin-bottom: 25px;
+      font-weight: 700;
       color: #e8f3ff;
-      text-shadow: 0 0 5px #ffffff33;
-      letter-spacing: 1px;
+      text-shadow: 0 0 6px #00aaff55;
+      letter-spacing: 1.2px;
     }
 
     textarea {
       width: 90%;
       max-width: 800px;
-      height: 250px;
+      height: 220px;
       font-family: monospace;
       font-size: 14px;
-      background-color: #1e2630;
+      line-height: 1.5;
+      background: #0d1117;
       color: #e6edf3;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 8px;
-      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
       margin-bottom: 20px;
       resize: vertical;
+      transition: all 0.3s ease;
+      box-shadow: 6px 6px 12px #080b0f,
+                  -6px -6px 12px #1a222d;
     }
 
+    textarea:focus {
+      outline: none;
+      box-shadow: inset 4px 4px 8px #080b0f,
+                  inset -4px -4px 8px #1a222d,
+                  0 0 12px rgba(3, 115, 243, 0.4);
+    }
+
+    /* Button */
     .button-container {
       display: flex;
-      gap: 16px;
-      justify-content: center;
+      justify-content: center; /* biar rata tengah */
+      width: 100%;
       margin-bottom: 20px;
     }
 
     button {
-      padding: 8px 16px;
+      width: 30%;        /* panjang tombol 40% */
+      max-width: 300px;  /* biar gak kelebaran di layar besar */
+      padding: 17px 0;   /* atur tinggi tombol */
       font-weight: bold;
-      background: rgba(3, 115, 243, 0.1);
+      background: rgba(3, 115, 243, 0.15);
       color: #e6edf3;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 5px;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
+      font-size: 15px;
+      position: relative;
+      overflow: hidden;
       transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-      font-size: 13px;
+      box-shadow: 6px 6px 12px #080b0f,
+                  -6px -6px 12px #1a222d;
     }
 
-    button:hover {
-      background: rgba(255, 255, 255, 0.2);
-      box-shadow: 0 0 10px rgba(141, 166, 255, 0.15);
-      color: #ffffff;
+    /* Efek cahaya berjalan */
+    button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 150%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(3, 115, 243, 0.4),
+        transparent
+      );
+      transform: skewX(-20deg);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% { left: -150%; }
+      100% { left: 150%; }
+    }
+
+    button:hover,
+    button:focus {
+      background: rgba(3, 115, 243, 0.25);
+      box-shadow: inset 4px 4px 8px #080b0f,
+                  inset -4px -4px 8px #1a222d,
+                  0 0 15px rgba(3, 115, 243, 0.4);
+      color: #fff;
     }
 
     table {
-      width: 100%;
+      width: 95%;
       max-width: 1000px;
       margin-top: 20px;
       border-collapse: collapse;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 0 10px rgba(0, 18, 71, 0.2);
+      box-shadow: 0 0 12px rgba(0, 18, 71, 0.25);
     }
 
     th, td {
-      padding: 10px;
+      padding: 12px;
       text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     th {
       background: #1e2630;
       color: #e6edf3;
       font-weight: 600;
+      letter-spacing: 0.5px;
     }
 
     td {
-      background: #0d1117;
+      background: #161b22;
       color: #e6edf3;
+      transition: background 0.3s;
+    }
+
+    tr:nth-child(even) td {
+      background: #1b222c;
+    }
+
+    tr:hover td {
+      background: #222b36;
     }
