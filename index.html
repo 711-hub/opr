@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>Menu Utama</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     :root {
@@ -16,163 +16,220 @@
       --hover-bg: #21262d;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--primary-bg);
       color: var(--highlight);
-    }
-
-    .sidebar {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 240px;
-      height: 100vh;
-      background: var(--secondary-bg);
-      padding: 30px 20px;
-      border-right: 1px solid #2a2f36;
-    }
-
-    .sidebar .logo {
-      display: block;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .sidebar .logo img {
-      max-width: 140px;
-      height: auto;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-    }
-
-    .sidebar a {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 12px;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 30px 15px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 30px;
+      text-align: center;
+      margin-bottom: 35px;
       color: var(--highlight);
-      text-decoration: none;
-      margin: 12px 0;
-      padding: 12px 16px;
-      border-radius: 8px;
-      transition: background 0.3s, transform 0.2s;
-      background: linear-gradient(to right, #161b22, #1f2933);
-      box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      z-index: 2;
+      position: relative;
     }
 
-    .sidebar a i {
-      width: 18px;
-      text-align: center;
-    }
-
-    .sidebar a:hover {
-      background: var(--hover-bg);
-      transform: translateX(4px);
-    }
-
-    .logout-btn {
-      margin-top: 30px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #2d3a49;
-      color: #fff;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.2s;
-      width: 100%;
-      font-size: 15px;
-    }
-
-    .logout-btn i {
-      width: 16px;
-      text-align: center;
-    }
-
-    .logout-btn:hover {
-      background: #3b4a5c;
-    }
-
-    .main {
-      margin-left: 260px;
-      padding: 30px;
-    }
-
-    .cards {
+    .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 900px;
+      width: 100%;
+      z-index: 2;
+      position: relative;
     }
 
-    .card {
+    .menu-item {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
       background: var(--card-bg);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      transition: transform 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
+      border-radius: 18px;
+      padding: 24px 18px;
+      text-align: center;
+      transition: transform 0.25s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
       color: var(--highlight);
-      font-weight: 600;
     }
 
-    @media (max-width: 768px) {
-      .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        border-right: none;
-        border-bottom: 1px solid #2c343f;
-      }
+    .menu-item:hover {
+      transform: translateY(-6px);
+      background: var(--hover-bg);
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+    }
 
-      .main {
-        margin-left: 0;
-        margin-top: 20px;
-        padding: 20px;
-      }
+    .menu-item .icon {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      background: var(--secondary-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      font-size: 34px;
+      color: var(--accent);
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+      transition: transform 0.25s ease, box-shadow 0.3s ease;
+    }
+
+    .menu-item:hover .icon {
+      transform: scale(1.08);
+      box-shadow: 0 0 12px var(--accent), inset 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .menu-item span {
+      display: block;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--highlight);
+    }
+
+    /* Efek Cahaya Kilauan */
+    .menu-item::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 80%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.25) 50%,
+        transparent 100%
+      );
+      transform: skewX(-20deg);
+      animation: shine 6s infinite;
+    }
+
+    @keyframes shine {
+      0%   { left: -100%; }
+      40%  { left: 120%; }
+      100% { left: 120%; }
+    }
+
+    /* Balok Background */
+    .background-block,
+    .background-block-top,
+    .background-block-left,
+    .background-block-right {
+      position: absolute;
+      background: var(--secondary-bg);
+      z-index: 1;
+    }
+
+    .background-block {
+      bottom: -120px;
+      left: 0;
+      width: 100%;
+      height: 250px;
+      border-top-left-radius: 60px;
+      border-top-right-radius: 60px;
+      animation: floatBlock 2s ease-in-out infinite alternate;
+    }
+
+    .background-block-top {
+      top: -120px;
+      left: 0;
+      width: 100%;
+      height: 250px;
+      border-bottom-left-radius: 60px;
+      border-bottom-right-radius: 60px;
+      animation: floatBlockTop 2s ease-in-out infinite alternate;
+    }
+
+    .background-block-left {
+      top: 0;
+      left: -120px;
+      width: 250px;
+      height: 100%;
+      border-top-right-radius: 60px;
+      border-bottom-right-radius: 60px;
+      animation: floatBlockLeft 2s ease-in-out infinite alternate;
+    }
+
+    .background-block-right {
+      top: 0;
+      right: -120px;
+      width: 250px;
+      height: 100%;
+      border-top-left-radius: 60px;
+      border-bottom-left-radius: 60px;
+      animation: floatBlockRight 2s ease-in-out infinite alternate;
+    }
+
+    /* Animasi Balok */
+    @keyframes floatBlock { from { transform: translateY(0); } to { transform: translateY(-30px); } }
+    @keyframes floatBlockTop { from { transform: translateY(0); } to { transform: translateY(30px); } }
+    @keyframes floatBlockLeft { from { transform: translateX(0); } to { transform: translateX(30px); } }
+    @keyframes floatBlockRight { from { transform: translateX(0); } to { transform: translateX(-30px); } }
+
+    /* Responsif */
+    @media (max-width: 900px) {
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .menu-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <div class="sidebar">
-    <div class="logo">
-      <img src="https://hs-staging.dev/assets/img/logoicon/logo.png" alt="Logo">
-    </div>
-    <a href="autonawala/"><i class="fas fa-home"></i>Auto Check Nawala</a>
-  <a href="mutasidana/"><i class="fas fa-money-check-alt"></i> Cek Mutasi Dana</a>
-    <a href="mahjongevent/"><i class="fas fa-money-check-alt"></i> Hitung Bonus Mahjong</a>
-  <a href="daftarlock/"><i class="fas fa-lock"></i> Lock | Unlock</a>
-  <a href="generatorangka/"><i class="fas fa-dice"></i> Generator Angka</a>
-  <a href="changedata/"><i class="fas fa-user-shield"></i> Change Data</a>
+  <!-- Balok Atas -->
+  <div class="background-block-top"></div>
+  <!-- Balok Kiri -->
+  <div class="background-block-left"></div>
+  <!-- Balok Kanan -->
+  <div class="background-block-right"></div>
+
+  <h1>MENU UTAMA</h1>
+
+  <div class="menu-grid">
+    <a href="autonawala/" class="menu-item">
+      <div class="icon"><i class="fas fa-home"></i></div>
+      <span>Auto Check Nawala</span>
+    </a>
+    <a href="mutasidana/" class="menu-item">
+      <div class="icon"><i class="fas fa-money-check-alt"></i></div>
+      <span>Cek Mutasi Dana</span>
+    </a>
+    <a href="mahjongevent/" class="menu-item">
+      <div class="icon"><i class="fas fa-coins"></i></div>
+      <span>Hitung Bonus Mahjong</span>
+    </a>
+    <a href="daftarlock/" class="menu-item">
+      <div class="icon"><i class="fas fa-lock"></i></div>
+      <span>Lock | Unlock</span>
+    </a>
+    <a href="generatorangka/" class="menu-item">
+      <div class="icon"><i class="fas fa-dice"></i></div>
+      <span>Generator Angka</span>
+    </a>
+    <a href="changedata/" class="menu-item">
+      <div class="icon"><i class="fas fa-user-shield"></i></div>
+      <span>Change Data</span>
+    </a>
   </div>
 
-  <div class="main">
-    <h1 style="margin-bottom: 20px;">Selamat Datang </h1>
-  </div>
+    
 
-  <script>
-    function logout() {
-      window.location.href = "index.html";
-    }
-  </script>
+  <!-- Balok Bawah -->
+  <div class="background-block"></div>
+
 </body>
 </html>
-
-
-
-
-
