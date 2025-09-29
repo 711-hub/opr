@@ -39,8 +39,6 @@ body {
   text-align: center;         
 }
 
-
-
 .info-icon {
   animation: bell-shake 1.2s infinite linear;
   display: flex;
@@ -53,7 +51,6 @@ body {
   text-overflow: ellipsis;
   flex-grow: 1;
 }
-
 
 h2 {
   font-size: 26px;
@@ -114,12 +111,38 @@ h2 {
   z-index: 1;
   backdrop-filter: blur(12px);
   transition: all 0.3s ease;
+  overflow: hidden; /* penting untuk shine effect */
 }
 
 .blue-glow-button:hover {
-  box-shadow: 0 0 15px rgba(141, 166, 255, 0.15); /* Neon Biru Muda */
+  box-shadow: 0 0 15px rgba(141, 166, 255, 0.3); /* Neon Biru Muda */
   background: rgba(255, 255, 255, 0.2);
   color: #ffffff;
+}
+
+/* Shine effect */
+.blue-glow-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: shine 3.5s infinite;
+  z-index: 0; /* shine di bawah teks tombol */
+}
+
+@keyframes shine {
+  0%   { left: -75%; }
+  60%  { left: 130%; }
+  100% { left: 130%; }
 }
 
 table {
@@ -168,7 +191,7 @@ td {
   font-size: 12px;
   user-select: none;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 9999; /* pastikan salju di atas shine tombol */
   animation-name: snowFall;
   animation-timing-function: linear;
 }
@@ -176,11 +199,4 @@ td {
 @keyframes snowFall {
   0% { transform: translateY(0) rotate(0deg); opacity: 1; }
   100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-}
-
-@keyframes bell-shake {
-  0%,100% { transform: rotate(-10deg);}
-  20%,80% { transform: rotate(10deg);}
-  40%,60% { transform: rotate(-10deg);}
-  50% { transform: rotate(10deg);}
 }
