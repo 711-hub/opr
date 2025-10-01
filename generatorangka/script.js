@@ -17,9 +17,9 @@ function generateRandomNumber(length = 9) {
 // Data Pasaran
 const pasaranData = [
   { name: "DUBAI", tutup: "19:30 WIB", buka: "19:50 WIB", hari: "Buka Setiap Hari" },
-  { name: "SYDNEY", tutup: "13:35 WIB", buka: "13:50 WIB", hari: "Buka Setiap Hari" },
+  { name: "SYDNEY", tutup: "13:49 WIB", buka: "14:05 WIB", hari: "Buka Setiap Hari" },
   { name: "SINGAPORE", tutup: "17:30 WIB", buka: "17:40 WIB", hari: "Hari Selasa dan Jumat Libur" },
-  { name: "HONGKONG", tutup: "22:45 WIB", buka: "23:00 WIB", hari: "Buka Setiap Hari" },
+  { name: "HONGKONG", tutup: "22:59 WIB", buka: "23:15 WIB", hari: "Buka Setiap Hari" },
   { name: "PHNOMPENH-LOTTO", tutup: "11:35 WIB", buka: "11:50 WIB", hari: "Buka Setiap Hari" },
   { name: "TAIPEI", tutup: "21:00 WIB", buka: "21:15 WIB", hari: "Buka Setiap Hari" },
   { name: "SEOUL", tutup: "23:30 WIB", buka: "23:50 WIB", hari: "Buka Setiap Hari" },
@@ -124,3 +124,4 @@ function generateAll() {
     outputDiv.innerHTML += html;
   });
 }
+
