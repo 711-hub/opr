@@ -1,4 +1,3 @@
-// angka 9 digit
 function generateRandomNumber(length = 9) {
   const chars = '0123456789';
   let result = '';
@@ -8,13 +7,6 @@ function generateRandomNumber(length = 9) {
   return result;
 }
 
-  const tanggalElemen = document.getElementById("tanggal-sekarang");
-  const now = new Date();
-  const formatter = new Intl.DateTimeFormat('id-ID', { day: '2-digit', month: 'long', year: 'numeric' });
-  tanggalElemen.textContent = formatter.format(now).toUpperCase();
-
-
-// Data Pasaran
 const pasaranData = [
   { name: "DUBAI", tutup: "19:30 WIB", buka: "19:50 WIB", hari: "Buka Setiap Hari" },
   { name: "SYDNEY", tutup: "13:49 WIB", buka: "14:05 WIB", hari: "Buka Setiap Hari" },
@@ -27,7 +19,6 @@ const pasaranData = [
   { name: "KINGKONG 4D MALAM", tutup: "23:30 WIB", buka: "23:45 WIB", hari: "Buka Setiap Hari" },
 ];
 
-// shio
 function calculateShio(num) {
   const shioMap = {
     Ular: ["01", "13", "25", "37", "49", "61", "73", "85", "97"],
@@ -51,13 +42,10 @@ function calculateShio(num) {
   return "-";
 }
 
-
 function copyToClipboard(columnId) {
   const column = document.getElementById(columnId);
-
   let textToCopy = '';
   const contentElements = column.querySelectorAll('h4, h5');
-
   contentElements.forEach(element => {
     textToCopy += element.innerText.trim() + '\n';
   });
@@ -67,20 +55,8 @@ function copyToClipboard(columnId) {
   textArea.select();
   document.execCommand("copy");
   document.body.removeChild(textArea);
-
-  const btn = column.querySelector("button");
-  const originalText = btn.innerText;
-  btn.innerText = "Tersalin!";
-  btn.disabled = true;
-
-  setTimeout(() => {
-    btn.innerText = originalText;
-    btn.disabled = false;
-  }, 2000);
 }
 
-
-// prediksi
 function processNumber(num) {
   const ai = num.slice(-4);
   const aiArray = ai.split('').sort(() => Math.random() - 0.5);
@@ -97,31 +73,58 @@ function generateAll() {
   outputDiv.innerHTML = '';
 
   const tgl = new Date();
-  tgl.setDate(tgl.getDate());
+
+  // ✅ OTOMATIS CEK HARI DARI SISTEM
+  const hariList = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
+  const hariSekarang = hariList[tgl.getDay()]; // otomatis: 0 minggu, 1 senin, dst.
+
   const tanggal = tgl.toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' });
 
   pasaranData.forEach(p => {
-    const data = processNumber(generateRandomNumber());
-    const top10 = data.bb.match(/.{1,2}/g).map(val => val + "*").join(" ");
     const columnId = `column-${p.name}`;
-    const html = `
-      <div class="col-md-6">
-        <div class="card p-3 shadow-sm" id="${columnId}">
-          <h4>PREDIKSI Angka Jitu ${p.name}, ${tanggal}</h4>
-          <h5>Jam Tutup : ${p.tutup}, Jam Buka : ${p.buka}</h5>
-          <h5>${p.hari}</h5>
-          <h5>Angka BBFS: ${data.bbfs}</h5>
-          <h5>Angka Ikut: ${data.ai}</h5> 
-          <h5>Colok Bebas: ${data.cb}</h5>
-          <h5>Colok Macau: ${data.cm}</h5>
-          <h5>Top 10 2D Bolak Balik:</h5>  
-          <h5>${top10}</h5>
-          <h5>Shio: ${data.shio}</h5>
-          <button onclick="copyToClipboard('${columnId}')" class="btn-glass">Salin</button>
+    let html = '';
+
+    // Jika Singapore libur Selasa & Jumat
+    if (p.name === "SINGAPORE" && (hariSekarang === "selasa" || hariSekarang === "jumat")) {
+      html = `
+        <div class="col-md-6">
+          <div class="card p-3 shadow-sm" id="${columnId}">
+            <h4>PREDIKSI Angka Jitu ${p.name}, ${tanggal}</h4>
+            <h5 style="color:red; font-weight:bold;">PASARAN TUTUP</h5>
+            <h5 style="color:red; font-weight:bold;">PASARAN TUTUP</h5>
+            <h5 style="color:red; font-weight:bold;">PASARAN TUTUP</h5>
+            <h5 style="color:red; font-weight:bold;">PASARAN TUTUP</h5>
+            <h5 style="color:red; font-weight:bold;">PASARAN TUTUP</h5>
+            <h5 style="color:red; font-weight:bold;">PASARAN TUTUP</h5>
+            <h5 style="color:red; font-weight:bold;">PASARAN TUTUP</h5>
+            <h5 style="color:red; font-weight:bold;">PASARAN TUTUP</h5>
+            <h5 style="color:red; font-weight:bold;">PASARAN TUTUP</h5>
+            <h5 style="color:red; font-weight:bold;">PASARAN TUTUP</h5>
+          </div>
         </div>
-      </div>
-    `;
+      `;
+    } else {
+      const data = processNumber(generateRandomNumber());
+      const top10 = data.bb.match(/.{1,2}/g).map(val => val + "*").join(" ");
+      html = `
+        <div class="col-md-6">
+          <div class="card p-3 shadow-sm" id="${columnId}">
+            <h4>PREDIKSI Angka Jitu ${p.name}, ${tanggal}</h4>
+            <h5>Jam Tutup : ${p.tutup}, Jam Buka : ${p.buka}</h5>
+            <h5>${p.hari}</h5>
+            <h5>Angka BBFS: ${data.bbfs}</h5>
+            <h5>Angka Ikut: ${data.ai}</h5> 
+            <h5>Colok Bebas: ${data.cb}</h5>
+            <h5>Colok Macau: ${data.cm}</h5>
+            <h5>Top 10 2D Bolak Balik:</h5>  
+            <h5>${top10}</h5>
+            <h5>Shio: ${data.shio}</h5>
+            <button onclick="copyToClipboard('${columnId}')" class="btn-glass">Salin</button>
+          </div>
+        </div>
+      `;
+    }
+
     outputDiv.innerHTML += html;
   });
 }
-
