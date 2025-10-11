@@ -44,7 +44,7 @@ function processData() {
     "marketing", "ref", "struk", "admin", "4d", "3d", "2d",
     "savety bet", "hantu", "ulang", "mkt", "edit", "addmin",
     "memilih", "gunakan", "bermain",
-    "kembali", "invest", "penipu", "pulsa", "staff", "pakai id","pilih", "resign"
+    "kembali", "invest", "penipu", "pulsa", "staff", "pakai id","pilih", "kalah", "resign"
   ];
 
   const warningKeywords = ["kosong", "form", "isi"];
@@ -104,5 +104,6 @@ function processData() {
   document.getElementById("resultTable").style.display = results.length ? "table" : "none";
 
 }
+
 
 
