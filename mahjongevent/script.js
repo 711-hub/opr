@@ -10,17 +10,17 @@ function prosesData() {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
-    
-    if (lines[i+1] && lines[i+1].toLowerCase().includes('pgsoft')) {
+    // --- Deteksi nama game (baris sebelum "PGSoft")
+    if (lines[i + 1] && lines[i + 1].toLowerCase().includes('pgsoft')) {
       currentGame = line;
     }
 
-    
-    if (line.includes('Ext. ID')) {
-      const match = line.match(/Ext\. ID\s*:\s*([0-9\-]+)/);
+    // --- Deteksi Ext. ID
+    if (line.toLowerCase().includes('ext. id')) {
+      const match = line.match(/ext\. id\s*:\s*([a-z0-9\-]+)/i);
       if (match) {
         const parts = match[1].split('-');
-        currentPeriode = parts[1];
+        currentPeriode = parts[1] || match[1];
 
         if (!grouped[currentPeriode]) {
           grouped[currentPeriode] = {
@@ -31,10 +31,15 @@ function prosesData() {
           };
         }
 
-        
-        let possibleUser = lines[i+1] || '';
-        if (/^[a-zA-Z0-9_]+$/.test(possibleUser)) {
+        // --- Ambil nama user (baris setelah Ext. ID)
+        let possibleUser = lines[i + 1] || '';
+        if (/^[a-zA-Z0-9_\-]+$/.test(possibleUser)) {
           currentUser = possibleUser;
+        } else if (
+          !possibleUser.includes(':') &&
+          !/\d{2}\s\w{3}/.test(possibleUser)
+        ) {
+          currentUser = possibleUser.trim();
         }
 
         grouped[currentPeriode].user = currentUser;
@@ -42,8 +47,8 @@ function prosesData() {
       }
     }
 
-    
-    if (line.startsWith('Credit')) {
+    // --- Deteksi Credit
+    if (line.toLowerCase().startsWith('credit')) {
       const nextLine = lines[i + 1] || '';
       const amount = parseInt(nextLine.replace(/[^\d]/g, ''), 10);
       if (!isNaN(amount) && grouped[currentPeriode]) {
@@ -51,8 +56,8 @@ function prosesData() {
       }
     }
 
-    
-    if (line.startsWith('Debit')) {
+    // --- Deteksi Debit
+    if (line.toLowerCase().startsWith('debit')) {
       const nextLine = lines[i + 1] || '';
       const amount = parseInt(nextLine.replace(/[^\d]/g, ''), 10);
       if (!isNaN(amount) && grouped[currentPeriode]) {
@@ -61,6 +66,12 @@ function prosesData() {
     }
   }
 
+  // --- Fungsi format angka pakai koma
+  const formatKoma = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
+  // --- Tampilkan hasil di tabel
   const table = document.getElementById('resultTable');
   const tbody = table.querySelector('tbody');
   tbody.innerHTML = '';
@@ -71,33 +82,33 @@ function prosesData() {
     const row = document.createElement('tr');
 
     const rowData = [
-      data.user,
+      data.user || '-',
       '-',
       '-',
-      data.game,
-      periode,
-      data.credit.toString(),
-      data.debit.toString()
+      data.game || '-',
+      periode || '-',
+      formatKoma(data.credit),
+      formatKoma(data.debit)
     ];
 
     row.innerHTML = rowData.map(col => `<td>${col}</td>`).join('');
 
+    // Tombol Salin
     const salinTd = document.createElement('td');
     const salinBtn = document.createElement('button');
     salinBtn.textContent = 'Salin';
     salinBtn.className = 'btn-table';
-
     salinBtn.onclick = () => {
       navigator.clipboard.writeText(rowData.join('\t'));
     };
     salinTd.appendChild(salinBtn);
     row.appendChild(salinTd);
 
+    // Kolom Selisih
     const selisihTd = document.createElement('td');
-    selisihTd.textContent = selisih.toString();
+    selisihTd.textContent = formatKoma(selisih);
     row.appendChild(selisihTd);
 
     tbody.appendChild(row);
   });
 }
-
