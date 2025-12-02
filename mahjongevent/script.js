@@ -7,20 +7,17 @@ function prosesData() {
   let currentUser = '';
   let currentGame = '';
 
-  // ==== VARIABEL UNTUK LOGIKA ALERT BONUS ====
-  let totalCreditAll = 0;   // total semua credit
-  let totalDebitAll = 0;    // total semua debit
-  let jumlahBettingan = 0;  // jumlah bettingan (jumlah baris "Debit")
+  let totalCreditAll = 0;  
+  let totalDebitAll = 0; 
+  let jumlahBettingan = 0;
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
-    // --- Deteksi nama game (baris sebelum "PGSoft")
     if (lines[i + 1] && lines[i + 1].toLowerCase().includes('pgsoft')) {
       currentGame = line;
     }
 
-    // --- Deteksi Ext. ID
     if (line.toLowerCase().includes('ext. id')) {
       const match = line.match(/ext\. id\s*:\s*([a-z0-9\-]+)/i);
       if (match) {
@@ -36,7 +33,6 @@ function prosesData() {
           };
         }
 
-        // --- Ambil nama user (baris setelah Ext. ID)
         let possibleUser = lines[i + 1] || '';
         if (/^[a-zA-Z0-9_\-]+$/.test(possibleUser)) {
           currentUser = possibleUser;
@@ -52,38 +48,32 @@ function prosesData() {
       }
     }
 
-    // --- Deteksi Credit
     if (line.toLowerCase().startsWith('credit')) {
       const nextLine = lines[i + 1] || '';
       const amount = parseInt(nextLine.replace(/[^\d]/g, ''), 10);
       if (!isNaN(amount) && grouped[currentPeriode]) {
         grouped[currentPeriode].credit += amount;
 
-        // >>> TAMBAHAN UNTUK ALERT
         totalCreditAll += amount;
       }
     }
 
-    // --- Deteksi Debit
     if (line.toLowerCase().startsWith('debit')) {
       const nextLine = lines[i + 1] || '';
       const amount = parseInt(nextLine.replace(/[^\d]/g, ''), 10);
       if (!isNaN(amount) && grouped[currentPeriode]) {
         grouped[currentPeriode].debit += amount;
 
-        // >>> TAMBAHAN UNTUK ALERT
         totalDebitAll += amount;
-        jumlahBettingan += 1;  // 1 baris "Debit" = 1 bettingan
+        jumlahBettingan += 1;  
       }
     }
   }
 
-  // --- Format angka
   const formatKoma = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  // --- Tampilkan tabel
   const table = document.getElementById('resultTable');
   const tbody = table.querySelector('tbody');
   tbody.innerHTML = '';
@@ -105,7 +95,6 @@ function prosesData() {
 
     row.innerHTML = rowData.map(col => `<td>${col}</td>`).join('');
 
-    // Tombol salin
     const salinTd = document.createElement('td');
     const salinBtn = document.createElement('button');
     salinBtn.textContent = 'Salin';
@@ -116,7 +105,6 @@ function prosesData() {
     salinTd.appendChild(salinBtn);
     row.appendChild(salinTd);
 
-    // Kolom selisih
     const selisihTd = document.createElement('td');
     selisihTd.textContent = formatKoma(selisih);
     row.appendChild(selisihTd);
@@ -124,26 +112,16 @@ function prosesData() {
     tbody.appendChild(row);
   });
 
-  /* ============================================================
-     🔥 LOGIKA ALERT BONUS (DIPERBAIKI, TETAP DI BAGIAN AKHIR)
-     ============================================================ */
-
-  const totalKemenangan = totalCreditAll - totalDebitAll;
+  const totalKemenangan = totalCreditAll;
 
   if (jumlahBettingan > 0) {
     const rataRata = totalKemenangan / jumlahBettingan;
-    // console.log({ totalKemenangan, jumlahBettingan, rataRata }); // kalau mau cek
+
     if (rataRata >= 300) {
       showBonusAlert();
     }
   }
 }
-
-
-
-/* ============================================================
-   🔥 SCRIPT BOX ALERT
-   ============================================================ */
 
 function showBonusAlert() {
   const el = document.getElementById('bonusAlert');
@@ -158,3 +136,5 @@ function closeBonusAlert() {
     el.style.display = 'none';
   }
 }
+
+
