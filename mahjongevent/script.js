@@ -112,10 +112,10 @@ function prosesData() {
     tbody.appendChild(row);
   });
 
-  const totalKemenangan = totalCreditAll;
+  const totalKemenanganBersih = totalCreditAll - totalDebitAll;
 
-  if (jumlahBettingan > 0) {
-    const rataRata = totalKemenangan / jumlahBettingan;
+  if (totalDebitAll > 0) {
+    const rataRata = totalKemenanganBersih / totalDebitAll;
 
     if (rataRata >= 300) {
       showBonusAlert();
@@ -136,5 +136,4 @@ function closeBonusAlert() {
     el.style.display = 'none';
   }
 }
-
 
