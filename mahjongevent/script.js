@@ -7,6 +7,11 @@ function prosesData() {
   let currentUser = '';
   let currentGame = '';
 
+  // ==== VARIABEL UNTUK LOGIKA ALERT BONUS ====
+  let totalCreditAll = 0;   // total semua credit
+  let totalDebitAll = 0;    // total semua debit
+  let jumlahBettingan = 0;  // jumlah bettingan (jumlah baris "Debit")
+
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
@@ -53,6 +58,9 @@ function prosesData() {
       const amount = parseInt(nextLine.replace(/[^\d]/g, ''), 10);
       if (!isNaN(amount) && grouped[currentPeriode]) {
         grouped[currentPeriode].credit += amount;
+
+        // >>> TAMBAHAN UNTUK ALERT
+        totalCreditAll += amount;
       }
     }
 
@@ -62,16 +70,20 @@ function prosesData() {
       const amount = parseInt(nextLine.replace(/[^\d]/g, ''), 10);
       if (!isNaN(amount) && grouped[currentPeriode]) {
         grouped[currentPeriode].debit += amount;
+
+        // >>> TAMBAHAN UNTUK ALERT
+        totalDebitAll += amount;
+        jumlahBettingan += 1;  // 1 baris "Debit" = 1 bettingan
       }
     }
   }
 
-  // --- Fungsi format angka pakai koma
+  // --- Format angka
   const formatKoma = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  // --- Tampilkan hasil di tabel
+  // --- Tampilkan tabel
   const table = document.getElementById('resultTable');
   const tbody = table.querySelector('tbody');
   tbody.innerHTML = '';
@@ -93,7 +105,7 @@ function prosesData() {
 
     row.innerHTML = rowData.map(col => `<td>${col}</td>`).join('');
 
-    // Tombol Salin
+    // Tombol salin
     const salinTd = document.createElement('td');
     const salinBtn = document.createElement('button');
     salinBtn.textContent = 'Salin';
@@ -104,11 +116,45 @@ function prosesData() {
     salinTd.appendChild(salinBtn);
     row.appendChild(salinTd);
 
-    // Kolom Selisih
+    // Kolom selisih
     const selisihTd = document.createElement('td');
     selisihTd.textContent = formatKoma(selisih);
     row.appendChild(selisihTd);
 
     tbody.appendChild(row);
   });
+
+  /* ============================================================
+     🔥 LOGIKA ALERT BONUS (DIPERBAIKI, TETAP DI BAGIAN AKHIR)
+     ============================================================ */
+
+  const totalKemenangan = totalCreditAll - totalDebitAll;
+
+  if (jumlahBettingan > 0) {
+    const rataRata = totalKemenangan / jumlahBettingan;
+    // console.log({ totalKemenangan, jumlahBettingan, rataRata }); // kalau mau cek
+    if (rataRata >= 300) {
+      showBonusAlert();
+    }
+  }
+}
+
+
+
+/* ============================================================
+   🔥 SCRIPT BOX ALERT
+   ============================================================ */
+
+function showBonusAlert() {
+  const el = document.getElementById('bonusAlert');
+  if (el) {
+    el.style.display = 'flex';
+  }
+}
+
+function closeBonusAlert() {
+  const el = document.getElementById('bonusAlert');
+  if (el) {
+    el.style.display = 'none';
+  }
 }
