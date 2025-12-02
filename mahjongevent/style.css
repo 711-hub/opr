@@ -53,7 +53,7 @@ textarea:focus {
   margin-bottom: 20px;
 }
 
-/* Tombol utama (Proses Data) */
+/* Tombol utama */
 button {
   width: 30%;
   max-width: 300px;
@@ -72,7 +72,7 @@ button {
               -6px -6px 12px #1a222d;
 }
 
-/* Efek cahaya berjalan (global untuk semua tombol) */
+/* Efek cahaya tombol */
 button::before,
 .btn-table::before {
   content: "";
@@ -145,7 +145,7 @@ tr:hover td {
   background: #222b36;
 }
 
-/* Tombol kecil di dalam tabel (Salin, Check) */
+/* Tombol kecil (Salin) */
 .btn-table {
   position: relative;
   padding: 6px 14px;
@@ -161,4 +161,68 @@ tr:hover td {
   transition: all 0.3s ease;
   min-width: 70px;
   overflow: hidden;
+}
+
+
+
+/* ============================================================
+   🔥 TAMBAHAN CSS ALERT — TIDAK MERUBAH YANG LAIN
+   ============================================================ */
+
+.alert-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+.alert-box {
+  position: relative;
+  width: 90%;
+  max-width: 460px;
+  padding: 25px 20px;
+  background: rgba(3,115,243,0.15);
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 10px 10px 24px #080b0f,
+              -10px -10px 24px #1a222d,
+              0 0 18px rgba(3,115,243,0.4);
+  overflow: hidden;
+}
+
+.alert-box {
+  position: relative;
+  max-width: 480px;
+  width: 90%;
+  background: rgba(3, 115, 243, 0.15);
+  border-radius: 10px;
+  padding: 22px 20px 18px;
+  
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+
+.alert-icon {
+  font-size: 42px;
+  margin-bottom: 10px;
+  text-shadow: 0 0 12px #ffd700aa;
+}
+
+.alert-text {
+  font-size: 17px;
+  font-weight: 600;
+  color: #e8f3ff;
+  margin-bottom: 18px;
+}
+
+.alert-close {
+  margin-top: 5px;
 }
