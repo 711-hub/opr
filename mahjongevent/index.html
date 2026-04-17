@@ -1,49 +1,64 @@
+
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <title>Bonus Scatter Mahjong Ways</title>
-    <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>BONUS SCATTER</h2>
-
-<textarea id="inputData" placeholder="Tempelkan data transaksi kamu di sini..."></textarea>
-
-<div class="button-container">
-  <button onclick="prosesData()">Proses Data</button>
-</div>
-
-<table id="resultTable" style="display: none;">
-  <thead>
-    <tr>
-      <th>USER ID</th>
-      <th>NAMA REKENING</th>
-      <th>NOMOR REKENING</th>
-      <th>PERMAINAN</th>
-      <th>KODE TICKET</th>
-      <th>TOTAL KEMENANGAN</th>
-      <th>NILAI TARUHAN</th>
-      <th>SALIN</th>
-      <th>CHECK</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
-  
-  <div id="bonusAlert" class="alert-overlay">
-  <div class="alert-box">
-    <div class="alert-icon">⚠️</div>
-    <div class="alert-text">
-      Kemenangan Memenuhi Syarat Untuk Claim Bonus Harian Slot !
-    </div>
-    <button class="btn-table alert-close" onclick="closeBonusAlert()">Tutup</button>
+  <div id="initialView" class="initial-view" onclick="showMainContent()">
+    <div class="spinner"></div>
+    <h2>BONUS SCATTER</h2>
+    <p style="color: #92a4b3; font-size: 14px;">Klik untuk melanjutkan</p>
   </div>
-</div>
 
-<script src="script.js"></script>
+  <div id="mainContent" class="main-content">
+    <div class="container">
+      <h2>BONUS SCATTER</h2> 
+      
+      <div class="border-glow-wrapper">
+        <textarea id="inputData" placeholder="Tempelkan data transaksi kamu di sini..."></textarea>
+      </div>
 
+      <div class="button-container">
+        <button onclick="prosesData()"><i class="fas fa-play-circle"></i> Proses Data</button>
+        <button onclick="resetData()"><i class="fas fa-sync-alt"></i> Reset</button>
+      </div>
+
+      <div id="warningMessage" class="warning" style="display: none;">
+        <i class="fas fa-exclamation-circle"></i> Harap inputkan data terlebih dahulu!
+      </div>
+
+      <table id="resultTable" style="display: none;">
+        <thead>
+          <tr>
+            <th>USER ID</th>
+            <th>NAMA REKENING</th>
+            <th>NOMOR REKENING</th>
+            <th>PERMAINAN</th>
+            <th>KODE TICKET</th>
+            <th>TOTAL KEMENANGAN</th>
+            <th>NILAI TARUHAN</th>
+            <th>SALIN</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+      
+    <div id="bonusAlert" class="alert-overlay">
+      <div class="alert-box">
+        <div style="font-size: 40px; margin-bottom: 10px;">⚠️</div>
+        <div style="font-weight: 600; margin-bottom: 15px;">Kemenangan Memenuhi Syarat Claim Bonus Harian Slot!</div>
+        <button class="btn-table" onclick="closeBonusAlert()">Tutup</button>
+      </div>
+    </div>
+  </div> 
+
+  <script src="script.js"></script>
 </body>
-
 </html>
